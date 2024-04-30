@@ -30,7 +30,7 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "created",
                         "schema": {
                             "$ref": "#/definitions/model.Tokens"

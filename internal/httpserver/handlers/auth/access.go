@@ -8,7 +8,7 @@ import (
 
 // @Tags auth
 // @Param        userID    query     string  true  " "
-// @Success      201   {object}  model.Tokens        "created"
+// @Success      200   {object}  model.Tokens        "created"
 // @Success      400   {object}  resp.RespError        "bad request"
 // @Success      500   {object}  resp.RespError        "internal server error"
 // @Router       /access [get]
@@ -30,5 +30,5 @@ func (router Router) access(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp.Json(w, r, tokens, http.StatusCreated)
+	resp.Json(w, r, tokens, http.StatusOK)
 }

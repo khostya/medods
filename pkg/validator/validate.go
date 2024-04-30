@@ -13,11 +13,6 @@ type validate struct {
 func newValidate() (*validate, error) {
 	v := validate{v: validator.New(validator.WithRequiredStructEnabled())}
 
-	err := v.v.RegisterValidation("password", v.passwordValidate)
-	if err != nil {
-		return nil, err
-	}
-
 	return &v, nil
 }
 
