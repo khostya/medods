@@ -1,0 +1,89 @@
+basePath: /
+definitions:
+  auth.Refresh:
+    properties:
+      accessToken:
+        type: string
+      refreshToken:
+        type: string
+    type: object
+  model.Tokens:
+    properties:
+      access:
+        type: string
+      refresh:
+        type: string
+    type: object
+  resp.RespError:
+    properties:
+      message:
+        type: string
+      type:
+        type: string
+      validationError:
+        $ref: '#/definitions/validator.ValidationError'
+    type: object
+  validator.ValidationError:
+    properties:
+      field:
+        type: string
+      message:
+        type: string
+      param:
+        type: string
+      tag:
+        type: string
+    type: object
+info:
+  contact: {}
+  title: medods
+  version: "1.0"
+paths:
+  /access:
+    get:
+      parameters:
+      - description: ' '
+        in: query
+        name: userID
+        required: true
+        type: string
+      responses:
+        "201":
+          description: created
+          schema:
+            $ref: '#/definitions/model.Tokens'
+        "400":
+          description: bad request
+          schema:
+            $ref: '#/definitions/resp.RespError'
+        "500":
+          description: internal server error
+          schema:
+            $ref: '#/definitions/resp.RespError'
+      tags:
+      - auth
+  /refresh:
+    post:
+      parameters:
+      - description: ' '
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/auth.Refresh'
+      responses:
+        "201":
+          description: refreshed
+          schema:
+            $ref: '#/definitions/model.Tokens'
+        "400":
+          description: bad request
+          schema:
+            $ref: '#/definitions/resp.RespError'
+        "500":
+          description: internal server error
+          schema:
+            $ref: '#/definitions/resp.RespError'
+      tags:
+      - auth
+swagger: "2.0"
